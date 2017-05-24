@@ -1,0 +1,10 @@
+{
+  "name"  : "daodao97/swoole-http-server-bundle",
+  "type"  : "project",
+  "keywords": ["swoole","symonfy"],
+  "license" : "MIT",
+  "require": {
+    "php": ">=5.3",
+    "symfony/symfony": ">=2.7"
+  }
+}
