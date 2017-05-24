@@ -1,10 +1,22 @@
 {
   "name"  : "daodao97/swoole-http-server-bundle",
-  "type"  : "project",
-  "keywords": ["swoole","symonfy"],
-  "license" : "MIT",
-  "require": {
-    "php": ">=5.3",
-    "symfony/symfony": ">=2.7"
-  }
+    "description": "Implements swoole php extension in symfony projects",
+    "type": "library",
+    "autoload": {
+        "psr-0": {
+            "Swoole\\HttpServerBundle": ""
+        }
+    },
+    "require": {
+        "php": ">=5.3",
+        "symfony/symfony": ">=2.7"
+    },
+    "minimum-stability": "dev",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Samat Yusupov",
+            "email": "nknighter@gmail.com"
+        }
+    ]
 }
