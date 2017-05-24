@@ -21,6 +21,15 @@ class RunCommand extends ServerCommand
 	protected $server = NULL;
 	protected $env    = 'dev';
 	protected $debug  = true;
+
+/*	public function __construct($name = NULL)
+	{
+		parent::__construct($name);
+		$this->kernel = new \AppKernel('dev',true);
+		Debug::enable();
+
+	}*/
+
 	protected function configure()
 	{
 		$this->setName('swoole:run')
@@ -49,6 +58,7 @@ class RunCommand extends ServerCommand
 	{
 		$this->kernel = new \AppKernel('dev',true);
 		Debug::enable();
+
 	}
 
 	// 每次打开链接页面默认都是接收两个请求, 一个是正常的数据请求, 一个 favicon.ico 的请求
@@ -56,6 +66,7 @@ class RunCommand extends ServerCommand
 	public function onRequest(\Swoole\Http\Request $swRequest,Response $swResponse)
 	{
 		$this->server->reload();
+		//$kernel = $this->getContainer()->get('kernel');
 		//$this->autoReload();
 		/** @var Request $sfRequest */
 		$sfRequest = Http::createSfRequest($swRequest);
