@@ -61,6 +61,14 @@ class StartCommand extends ServerCommand
 	// 每次请求都只会执行这里面的代码，不用再初始化框架内核，运行性能大大提高！
 	public function onRequest(\Swoole\Http\Request $swRequest,Response $swResponse)
 	{
+		$root_dir = $this->getContainer()->getParameter('kernel.root_dir');
+		$static = $root_dir.'/../web'.$swRequest->server['path_info'];
+		if ($swRequest->server['path_info']!='/' && file_exists($static)) {
+			$ext = pathinfo($static, PATHINFO_EXTENSION);
+			$swResponse->header('Content-Type', sprintf('text/%s', $ext));
+			$swResponse->end(file_get_contents($static));
+			return;
+		}
 		$kernel = $this->getContainer()->get('kernel');
 		$this->server->reload();
 		//$this->autoReload();

@@ -61,6 +61,14 @@ class RunCommand extends ServerCommand
 		}
 
 		$root_dir = $this->getContainer()->getParameter('kernel.root_dir');
+		$static = $root_dir.'/../web'.$swRequest->server['path_info'];
+		if ($swRequest->server['path_info']!='/' && file_exists($static)) {
+			$ext = pathinfo($static, PATHINFO_EXTENSION);
+			$swResponse->header('Content-Type', sprintf('text/%s', $ext));
+			$swResponse->end(file_get_contents($static));
+			return;
+		}
+
 
 		$this->server->reload();
 		$kernel = $this->getContainer()->get('kernel');
