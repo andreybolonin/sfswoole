@@ -5,7 +5,7 @@ run symfony in swoole
 	composer require daodao/swoole-http-server-bundel:div-master
 ```
 
-##2 register in AppKernel
+2 register in AppKernel
 ```php
 	$bundles = [
        ...
