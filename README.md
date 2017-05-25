@@ -1,6 +1,6 @@
-#run symfony in swoole
+run symfony in swoole
 
-##1 install 
+1 install 
 ```text
 	composer require daodao/swoole-http-server-bundel:div-master
 ```
@@ -14,7 +14,7 @@
     ];
 ```
 
-##3 swoole http server command
+3 swoole http server command
 ```text
 	* bin/consoel swoole:run   --evn=dev
 	* bin/consoel swoole:start --evn=prod
