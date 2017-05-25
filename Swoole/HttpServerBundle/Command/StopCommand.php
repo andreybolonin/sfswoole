@@ -16,7 +16,7 @@ class StopCommand extends ServerCommand
 	{
 		$pid = $this->getPid();
 		exec("kill {$pid}");
-		unlink($this->pid_file);
+		unlink($this->getPidFile());
 	}
 
 

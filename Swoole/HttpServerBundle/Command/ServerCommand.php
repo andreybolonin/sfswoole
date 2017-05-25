@@ -14,7 +14,7 @@ abstract class ServerCommand extends ContainerAwareCommand
 	/** @var $server Server */
 	protected  $server = NULL;
 	protected $change_time = NULL;
-	protected $pid_file = '/tmp/swoole_http_server.pid';
+	protected $pid_file = '';
 
 	/**
 	 * {@inheritdoc}
@@ -105,13 +105,21 @@ abstract class ServerCommand extends ContainerAwareCommand
 
 	public function getPid()
 	{
-		if(!file_exists($this->pid_file))
+		$pid_file = $this->getPidFile();
+
+		if(!file_exists($pid_file))
 		{
 			return false;
 		}
-		$f= fopen($this->pid_file,"r");
+		$f= fopen($pid_file,"r");
 		$line = fgets($f);
 		fclose($f);
 		return $line;
+	}
+
+	public function getPidFile()
+	{
+		$root_dir = $this->getContainer()->getParameter('kernel.root_dir');
+		return  $root_dir.'/../web'.'/swoole_http_server.pid';
 	}
 }

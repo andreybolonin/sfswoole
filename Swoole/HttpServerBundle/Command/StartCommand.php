@@ -33,6 +33,10 @@ class StartCommand extends ServerCommand
 
 	protected function execute(InputInterface $input, OutputInterface $output)
 	{
+		$root_dir = $this->getContainer()->getParameter('kernel.root_dir');
+		$web_dir = $root_dir.'/../web'.'/swoole_http_server.pid';
+		$this->pid_file = $web_dir;
+
 		$this->init( $input,  $output);
 		$this->server = new Server($input->getOption('host'),$input->getOption('port'));
 		$this->server->set([
@@ -44,6 +48,8 @@ class StartCommand extends ServerCommand
 		$this->server->on('Connect',[$this,'onConnect']);
 		$this->server->on('request',[$this,'onRequest']);
 		$this->server->start();
+
+
 	}
 
 	// 每次连接时(相当于每个浏览器第一次打开页面时)执行一次, reload 时连接不会断开, 也就不会再次触发该事件
