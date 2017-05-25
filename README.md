@@ -2,7 +2,7 @@ run symfony in swoole
 
 1 install 
 ```text
-    composer require daodao/swoole-http-server-bundel:div-master
+    composer require daodao97/swoole-http-server-bundel:div-master
 ```
 
 2 register in AppKernel
