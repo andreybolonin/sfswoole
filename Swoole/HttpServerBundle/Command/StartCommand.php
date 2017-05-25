@@ -49,21 +49,20 @@ class StartCommand extends ServerCommand
 	// 每次连接时(相当于每个浏览器第一次打开页面时)执行一次, reload 时连接不会断开, 也就不会再次触发该事件
 	public function onConnect(Server $server,$fd,$reactorThreadId)
 	{
-		$this->kernel = new \AppKernel('prod',false);
-		$this->kernel->loadClassCache();
 	}
 
 	// 每次打开链接页面默认都是接收两个请求, 一个是正常的数据请求, 一个 favicon.ico 的请求
 	// 每次请求都只会执行这里面的代码，不用再初始化框架内核，运行性能大大提高！
 	public function onRequest(\Swoole\Http\Request $swRequest,Response $swResponse)
 	{
+		$kernel = $this->getContainer()->get('kernel');
 		$this->server->reload();
 		//$this->autoReload();
 		/** @var Request $sfRequest */
 		$sfRequest = Http::createSfRequest($swRequest);
-		$sfResponse = $this->kernel->handle($sfRequest);
+		$sfResponse = $kernel->handle($sfRequest);
 		$swResponse->end(Http::createSwResponse($swResponse,$sfResponse));
-		$this->kernel->terminate($sfRequest,$sfResponse);
+		$kernel->terminate($sfRequest,$sfResponse);
 	}
 
 	// 服务器启动时执行一次
