@@ -54,11 +54,6 @@ class RunCommand extends ServerCommand
 	// 每次请求都只会执行这里面的代码，不用再初始化框架内核，运行性能大大提高！
 	public function onRequest(\Swoole\Http\Request $swRequest,Response $swResponse)
 	{
-		if($swRequest->server['request_uri']=='/favicon.ico')
-		{
-			$swResponse->end();
-			return;
-		}
 
 		$root_dir = $this->getContainer()->getParameter('kernel.root_dir');
 		$static = $root_dir.'/../web'.$swRequest->server['path_info'];
@@ -68,7 +63,6 @@ class RunCommand extends ServerCommand
 			$swResponse->end(file_get_contents($static));
 			return;
 		}
-
 
 		$this->server->reload();
 		$kernel = $this->getContainer()->get('kernel');

@@ -70,8 +70,6 @@ class StartCommand extends ServerCommand
 			return;
 		}
 		$kernel = $this->getContainer()->get('kernel');
-		$this->server->reload();
-		//$this->autoReload();
 		/** @var Request $sfRequest */
 		$sfRequest = Http::createSfRequest($swRequest);
 		$sfResponse = $kernel->handle($sfRequest);
