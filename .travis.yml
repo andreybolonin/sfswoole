@@ -1,0 +1,26 @@
+sudo: false
+
+language: php
+
+php:
+  - 7.1
+  - 7.2
+  - nightly
+
+install:
+  - rm -f ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/xdebug.ini
+  - composer install
+
+script:
+  # Check the code style
+  - ./vendor/bin/php-cs-fixer fix Swoole/ -v --dry-run --stop-on-violation --using-cache=no --path-mode=intersection
+  # Static analyzer check
+  - ./vendor/bin/phpstan analyze Swoole/ --level=1 --no-progress
+
+matrix:
+  fast_finish: true
+
+# Cache package sources
+cache:
+  directories:
+    - $HOME/.composer/cache
