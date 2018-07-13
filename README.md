@@ -5,6 +5,25 @@ run symfony in swoole
     composer require andreybolonin/swoole-http-server-bundle:dev-master
 ```
 
+2 define commands in services.yaml
+```text
+    Swoole\HttpServerBundle\Command\RunCommand:
+      tags:
+          - { name: 'console.command', command: 'swoole:run' }
+
+    Swoole\HttpServerBundle\Command\StatusCommand:
+      tags:
+          - { name: 'console.command', command: 'swoole:status' }
+
+    Swoole\HttpServerBundle\Command\StopCommand:
+      tags:
+          - { name: 'console.command', command: 'swoole:stop' }
+          
+    Swoole\HttpServerBundle\Command\StartCommand:
+      tags:
+          - { name: 'console.command', command: 'swoole:start' }
+```
+
 2 swoole http server command
 ```text
     * bin/console swoole:run   --evn=dev
