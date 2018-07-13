@@ -2,28 +2,19 @@ run symfony in swoole
 
 1 install 
 ```text
-    composer require daodao97/swoole-http-server-bundel:div-master
+    composer require andreybolonin/swoole-http-server-bundle:dev-master
 ```
 
-2 register in AppKernel
-```php
-    $bundles = [
-        ...
-        new Swoole\HttpServerBundle\SwooleHttpServerBundle(),
-        ...
-    ];
-```
-
-3 swoole http server command
+2 swoole http server command
 ```text
-    * bin/consoel swoole:run   --evn=dev
-    * bin/consoel swoole:start --evn=prod
-    * bin/consoel swoole:status
-    * bin/consoel swoole:stop
-    * bin/consoel swoole:reload
+    * bin/console swoole:run   --evn=dev
+    * bin/console swoole:start --evn=prod
+    * bin/console swoole:status
+    * bin/console swoole:stop
+    * bin/console swoole:reload
 ```
 
-4 nginx proxy config
+3 nginx proxy config
 ```text
     server {
         listen       80;
