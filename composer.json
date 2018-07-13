@@ -9,7 +9,7 @@
     },
     "require": {
         "php": ">=7.1",
-        "symfony/symfony": "^4"
+        "symfony/framework-bundle": "^4"
     },
     "license": "MIT",
     "authors": [
